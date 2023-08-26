@@ -16,4 +16,13 @@ interface MovieRepository : JpaRepository<Movie, Long> {
     @Query(value = "SELECT m FROM Movie m WHERE m.id = :id")
     fun findMovieById(id: Long): Movie
 
+    @Query(value = "SELECT m FROM Movie m WHERE m.genre ILike %:genre% order by m.releaseDate")
+    fun findMovieByGenre(genre: String): List<Movie>
+
+    @Query(value = "SELECT m FROM Movie m WHERE m.isCurrentlyShowing = true order by m.releaseDate")
+    fun findMovieByIsCurrentlyShowingT(): List<Movie>
+
+    @Query(value = "SELECT m FROM Movie m WHERE m.isCurrentlyShowing = false order by m.releaseDate")
+    fun findMovieByIsCurrentlyShowingF(): List<Movie>
+
 }

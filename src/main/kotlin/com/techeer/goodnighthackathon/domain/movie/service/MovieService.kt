@@ -1,5 +1,6 @@
 package com.techeer.goodnighthackathon.domain.movie.service
 
+import com.techeer.goodnighthackathon.domain.movie.domain.entity.Movie
 import com.techeer.goodnighthackathon.domain.movie.domain.repository.MovieRepository
 import com.techeer.goodnighthackathon.domain.movie.dto.*
 import com.techeer.goodnighthackathon.domain.movie.mapper.MovieMapper
@@ -32,4 +33,24 @@ class MovieService @Autowired constructor(
         val findMovie = movieRepository.findMovieById(id)
         return MovieMapper.mapCreateEntityToMovieDetailInfo(findMovie)
     }
+
+    fun findMovieByGenre(genre: String): List<Movie> {
+        val findMovie = movieRepository.findMovieByGenre(genre)
+        println(genre)
+        return findMovie
+    }
+
+    fun findMovieByIsCurrentlyShowing(OX: String): List<Movie> {
+        var findMovie: List<Movie> = emptyList()
+
+        if (OX.equals("true")) {
+            findMovie = movieRepository.findMovieByIsCurrentlyShowingT()
+        } else if (OX.equals("false")) {
+            findMovie = movieRepository.findMovieByIsCurrentlyShowingF()
+        }
+
+        return findMovie
+    }
+
+
 }

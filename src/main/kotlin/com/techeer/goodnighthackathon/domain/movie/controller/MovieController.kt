@@ -1,5 +1,6 @@
 package com.techeer.goodnighthackathon.domain.movie.controller
 
+import com.techeer.goodnighthackathon.domain.movie.domain.entity.Movie
 import com.techeer.goodnighthackathon.domain.movie.dto.*
 import com.techeer.goodnighthackathon.domain.movie.service.MovieService
 import org.springframework.web.bind.annotation.*
@@ -33,4 +34,23 @@ class MovieController(
         val findMovie = movieService.findOneMovie(id)
         return findMovie
     }
+
+    @GetMapping("list")
+    fun findMovieOne(
+        @RequestParam("select") select: String,
+        @RequestParam("data") data: String,
+    ): List<Movie> {
+        var findMovie: List<Movie> = emptyList()
+
+        if (select.equals("genre")) {
+            findMovie = movieService.findMovieByGenre(data)
+        } else {
+            findMovie = movieService.findMovieByIsCurrentlyShowing(data)
+
+        }
+
+        return findMovie
+    }
+
+
 }
