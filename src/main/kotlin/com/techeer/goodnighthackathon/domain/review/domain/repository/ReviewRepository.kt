@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ReviewRepository : JpaRepository<Review, Long> {
 
-    @Query(value = "SELECT r FROM Review r WHERE r.movie.id = :id order by r.registrationDate DESC")
-    fun findReviewById(id: Long): List<Review>
+    @Query(value = "SELECT r FROM Review r WHERE r.movie.id = :id AND r.rating > :rating order by r.registrationDate DESC")
+    fun findReviewById(id: Long, rating: Int): List<Review>
 
 }
