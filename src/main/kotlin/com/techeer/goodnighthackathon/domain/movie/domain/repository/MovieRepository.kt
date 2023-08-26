@@ -14,6 +14,6 @@ interface MovieRepository : JpaRepository<Movie, Long> {
     fun findMovieByTitleGenre(title: String, genre: String): Movie
 
     @Query(value = "SELECT m FROM Movie m WHERE m.id = :id")
-    fun findMovieByTitleGenre(id: Long): Movie
+    fun findMovieById(id: Long): Movie
 
 }

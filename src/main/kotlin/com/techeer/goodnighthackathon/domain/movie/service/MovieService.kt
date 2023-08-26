@@ -4,6 +4,7 @@ import com.techeer.goodnighthackathon.domain.movie.domain.repository.MovieReposi
 import com.techeer.goodnighthackathon.domain.movie.dto.movieCreateRequest
 import com.techeer.goodnighthackathon.domain.movie.dto.movieRemoveRequest
 import com.techeer.goodnighthackathon.domain.movie.dto.movieResponseInfo
+import com.techeer.goodnighthackathon.domain.movie.dto.movieUpdateRequest
 import com.techeer.goodnighthackathon.domain.movie.mapper.MovieMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -23,5 +24,10 @@ class MovieService @Autowired constructor(
         val removeMovie = movieRepository.save(findMovie)
         return MovieMapper.mapCreateEntityToMovieInfo(removeMovie)
     }
-
+    fun updateMovie(movieUpdateRequest: movieUpdateRequest): movieResponseInfo {
+        val findMovie = movieRepository.findMovieById(movieUpdateRequest.id)
+        findMovie.update(movieUpdateRequest.title, movieUpdateRequest.genre, movieUpdateRequest.releaseDate, movieUpdateRequest.endDate)
+        val updateMovie = movieRepository.save(findMovie)
+        return MovieMapper.mapCreateEntityToMovieInfo(updateMovie)
+    }
 }
