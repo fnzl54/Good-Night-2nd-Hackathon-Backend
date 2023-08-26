@@ -1,0 +1,25 @@
+package com.techeer.goodnighthackathon.domain.movie.mapper
+
+import com.techeer.goodnighthackathon.domain.movie.domain.entity.Movie
+import com.techeer.goodnighthackathon.domain.movie.dto.movieCreateRequest
+import com.techeer.goodnighthackathon.domain.movie.dto.movieCreateResponse
+
+
+object MovieMapper {
+    fun mapCreateMovieToEntity(movieCreateRequest: movieCreateRequest): Movie {
+        return Movie(
+            title = movieCreateRequest.title,
+            genre = movieCreateRequest.genre,
+            releaseDate = movieCreateRequest.releaseDate,
+            endDate = movieCreateRequest.endDate,
+            registrationDate = movieCreateRequest.registrationDate,
+            isCurrentlyShowing = movieCreateRequest.isCurrentlyShowing
+        )
+    }
+
+    fun mapCreateEntityToMovieInfo(movie: Movie): movieCreateResponse {
+        return movieCreateResponse(
+            title = movie.title
+        )
+    }
+}
