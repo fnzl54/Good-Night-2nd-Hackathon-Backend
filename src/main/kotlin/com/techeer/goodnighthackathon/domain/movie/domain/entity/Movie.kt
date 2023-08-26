@@ -17,5 +17,10 @@ data class Movie(
     val releaseDate: LocalDate, // 영화 개봉일
     val endDate: LocalDate, // 영화 상영 종료일
     val registrationDate : LocalDate, // 영화 등록일
-    val isCurrentlyShowing: Boolean // 현재 상영 중 여부
-)
+    val isCurrentlyShowing: Boolean, // 현재 상영 중 여부
+    var isActive: Boolean // 삭제 여부 판
+) {
+    fun remove() {
+        this.isActive = false
+    }
+}
